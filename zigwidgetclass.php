@@ -3,10 +3,10 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/wordpress/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.1
+Version: 0.2
 Author: ZigPress
 Requires at least: 3.0.5
-Tested up to: 3.1
+Tested up to: 3.1.1
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
@@ -51,6 +51,7 @@ if (!class_exists('ZigWidgetClass'))
 			add_filter('widget_form_callback', array($this, 'Form'), 10, 2);
 			add_filter('widget_update_callback', array($this, 'Update'), 10, 2);
 			add_filter('dynamic_sidebar_params', array($this, 'Apply'));
+			add_filter('plugin_row_meta', array($this, 'FilterPluginRowMeta'), 10, 2 );
 			}
 
 
@@ -86,6 +87,14 @@ if (!class_exists('ZigWidgetClass'))
 				$params[0]['before_widget'] = preg_replace('/class="/', "class=\"{$option_name[$number]['zigclass']} ", $params[0]['before_widget'], 1);
 				}
 			return $params;
+			}
+
+
+		public function FilterPluginRowMeta($links, $file) 
+			{
+			$plugin = plugin_basename(__FILE__);
+			if ($file == $plugin) return array_merge($links, array('<a target="_blank" href="http://www.zigpress.com/donations/">Donate</a>'));
+			return $links;
 			}
 
 
