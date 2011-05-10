@@ -2,9 +2,9 @@
 Contributors: ZigPress
 Donate link: http://www.zigpress.com/donations/
 Tags: widgets, widget, widget instance, custom class, classes, css, zig, zigpress
-Requires at least: 3.0.5
-Tested up to: 3.1
-Stable tag: 0.2
+Requires at least: 3.1.1
+Tested up to: 3.1.2
+Stable tag: 0.3
 
 Lets you add a custom class to each widget instance.
 
@@ -12,7 +12,7 @@ Lets you add a custom class to each widget instance.
 
 ZigWidgetClass adds a free text field to each widget control form on your widget admin page. Enter a class name in the box and it will be added to the classes that WordPress applies to that widget instance.
 
-Requires WordPress 3.0.5+ and PHP 5.0+.
+Requires WordPress 3.1.1+ and PHP 5.2.4+.
 
 For further information and support, please visit [the ZigWidgetClass home page](http://www.zigpress.com/wordpress/plugins/zigwidgetclass/).
 
@@ -27,6 +27,10 @@ For further information and support, please visit [the ZigWidgetClass home page]
 
 == Changelog ==
 
+= 0.3 =
+* Now does actually work in conjunction with Widget Logic (so much for earlier testing)
+* Updated PHP version requirement in readiness for WordPress 3.2
+* Updated WordPress version requirement as new code only tested on most recent versions
 = 0.2 =
 * Verified compatibility with WordPress 3.1.1
 = 0.1 =

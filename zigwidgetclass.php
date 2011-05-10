@@ -3,10 +3,10 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/wordpress/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.2
+Version: 0.3
 Author: ZigPress
-Requires at least: 3.0.5
-Tested up to: 3.1.1
+Requires at least: 3.1.1
+Tested up to: 3.1.2
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
@@ -46,8 +46,8 @@ if (!class_exists('ZigWidgetClass'))
 		public function __construct()
 			{
 			global $wp_version;
-			if (version_compare(phpversion(), '5.0.0', '<')) { wp_die(__('ZigWidgetClass requires PHP 5.0.0 or newer. Please update your server.', 'zigwidgetclass')); }
-			if (version_compare($wp_version, '3.0.5', '<')) { wp_die(__('ZigWidgetClass requires WordPress 3.0.5 or newer. Please update your installation.', 'zigwidgetclass')); }
+			if (version_compare(phpversion(), '5.2.4', '<')) { wp_die(__('ZigWidgetClass requires PHP 5.2.4 or newer. Please update your server.', 'zigwidgetclass')); }
+			if (version_compare($wp_version, '3.1.1', '<')) { wp_die(__('ZigWidgetClass requires WordPress 3.1.1 or newer. Please update your installation.', 'zigwidgetclass')); }
 			add_filter('widget_form_callback', array($this, 'Form'), 10, 2);
 			add_filter('widget_update_callback', array($this, 'Update'), 10, 2);
 			add_filter('dynamic_sidebar_params', array($this, 'Apply'));
@@ -80,7 +80,8 @@ if (!class_exists('ZigWidgetClass'))
 			global $wp_registered_widgets;
 			$widget_id = $params[0]['widget_id'];
 			$widget = $wp_registered_widgets[$widget_id];
-			$option_name = get_option($widget['callback'][0]->option_name);
+			if (!($widgetlogicfix = $widget['callback'][0]->option_name)) $widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name; # because the Widget Logic plugin changes this structure - how selfish of it!
+			$option_name = get_option($widgetlogicfix);
 			$number = $widget['params'][0]['number'];
 			if (isset($option_name[$number]['zigclass']) && !empty($option_name[$number]['zigclass'])) 
 				{
