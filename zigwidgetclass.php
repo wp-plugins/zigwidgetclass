@@ -3,10 +3,10 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/wordpress/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.3.1
+Version: 0.3.2
 Author: ZigPress
 Requires at least: 3.1.1
-Tested up to: 3.3.1
+Tested up to: 3.4
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
@@ -60,7 +60,7 @@ if (!class_exists('ZigWidgetClass'))
 			if (!isset($instance['zigclass'])) $instance['zigclass'] = null;
 			?>
 			<p>
-			<label for='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass'>ZigClass:</label>
+			<label for='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass'>ZigWidgetClass:</label>
 			<input type='text' name='widget-<?php echo $widget->id_base?>[<?php echo $widget->number?>][zigclass]' id='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass' class='widefat' value='<?php echo $instance['zigclass']?>'/>
 			</p>
 			<?php
