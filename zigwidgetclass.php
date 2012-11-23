@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: ZigWidgetClass
-Plugin URI: http://www.zigpress.com/wordpress/plugins/zigwidgetclass/
+Plugin URI: http://www.zigpress.com/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.3.2
+Version: 0.4
 Author: ZigPress
 Requires at least: 3.1.1
-Tested up to: 3.4
+Tested up to: 3.4.2
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
@@ -31,32 +31,28 @@ Foundation Inc, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
 
-/*
-ZigPress PHP code uses Whitesmiths indent style: http://en.wikipedia.org/wiki/Indent_style#Whitesmiths_style
-*/
-
-
 # DEFINE PLUGIN
 
 
-if (!class_exists('ZigWidgetClass'))
+if (!class_exists('zigwidgetclass')) {
+
+
+	class zigwidgetclass
 	{
-	class ZigWidgetClass
-		{
-		public function __construct()
-			{
+
+
+		public function __construct() {
 			global $wp_version;
-			if (version_compare(phpversion(), '5.2.4', '<')) { wp_die(__('ZigWidgetClass requires PHP 5.2.4 or newer. Please update your server.', 'zigwidgetclass')); }
-			if (version_compare($wp_version, '3.1.1', '<')) { wp_die(__('ZigWidgetClass requires WordPress 3.1.1 or newer. Please update your installation.', 'zigwidgetclass')); }
-			add_filter('widget_form_callback', array($this, 'Form'), 10, 2);
-			add_filter('widget_update_callback', array($this, 'Update'), 10, 2);
-			add_filter('dynamic_sidebar_params', array($this, 'Apply'));
-			add_filter('plugin_row_meta', array($this, 'FilterPluginRowMeta'), 10, 2 );
-			}
+			if (version_compare(phpversion(), '5.2.4', '<')) wp_die('ZigWidgetClass requires PHP 5.2.4 or newer. Please update your server.');
+			if (version_compare($wp_version, '3.1.1', '<')) wp_die('ZigWidgetClass requires WordPress 3.1.1 or newer. Please update your installation.');
+			add_filter('widget_form_callback', array($this, 'filter_widget_form_callback'), 10, 2);
+			add_filter('widget_update_callback', array($this, 'filter_widget_update_callback'), 10, 2);
+			add_filter('dynamic_sidebar_params', array($this, 'filter_dynamic_sidebar_params'));
+			add_filter('plugin_row_meta', array($this, 'filter_plugin_row_meta'), 10, 2 );
+		}
 
 
-		function Form($instance, $widget) 
-			{
+		function filter_widget_form_callback($instance, $widget) {
 			if (!isset($instance['zigclass'])) $instance['zigclass'] = null;
 			?>
 			<p>
@@ -65,54 +61,54 @@ if (!class_exists('ZigWidgetClass'))
 			</p>
 			<?php
 			return $instance;
-			}
+		}
 
 
-		function Update($instance, $new_instance) 
-			{
+		function filter_widget_update_callback($instance, $new_instance) {
 			$instance['zigclass'] = $new_instance['zigclass'];
 			return $instance;
-			}
+		}
 
 
-		function Apply($params) 
-			{
+		function filter_dynamic_sidebar_params($params) {
 			global $wp_registered_widgets;
 			$widget_id = $params[0]['widget_id'];
 			$widget = $wp_registered_widgets[$widget_id];
-			if (!($widgetlogicfix = $widget['callback'][0]->option_name)) $widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name; # because the Widget Logic plugin changes this structure - how selfish of it!
+			if (!($widgetlogicfix = $widget['callback'][0]->option_name)) {
+				# we do this because the Widget Logic plugin changes this structure
+				$widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name; 
+			}
 			$option_name = get_option($widgetlogicfix);
 			$number = $widget['params'][0]['number'];
-			if (isset($option_name[$number]['zigclass']) && !empty($option_name[$number]['zigclass'])) 
-				{
+			if (isset($option_name[$number]['zigclass']) && !empty($option_name[$number]['zigclass'])) {
+				# add our class to the start of the existing class declaration
 				$params[0]['before_widget'] = preg_replace('/class="/', "class=\"{$option_name[$number]['zigclass']} ", $params[0]['before_widget'], 1);
-				}
+			}
 			return $params;
-			}
+		}
 
 
-		public function FilterPluginRowMeta($links, $file) 
-			{
+		public function filter_plugin_row_meta($links, $file) {
 			$plugin = plugin_basename(__FILE__);
-			if ($file == $plugin) return array_merge($links, array('<a target="_blank" href="http://www.zigpress.com/donations/">Donate</a>'));
-			return $links;
+			if ($file == $plugin) { 
+				return array_merge($links, array('<a target="_blank" href="http://www.zigpress.com/donations/">Donate</a>'));
 			}
+			return $links;
+		}
 
 
-		} # end of class
+	} # END OF CLASS
 
 
-	}
-else
-	{
-	exit('Class ZigWidgetClass already declared!');
-	}
+} else {
+	wp_die('Namespace clash! Class zigwidgetclass already declared.');
+}
 
 
 # INSTANTIATE PLUGIN
 
 
-$objZigWidgetClass = new ZigWidgetClass();
+$zigwidgetclass = new zigwidgetclass();
 
 
 # EOF

@@ -3,18 +3,23 @@ Contributors: ZigPress
 Donate link: http://www.zigpress.com/donations/
 Tags: widgets, widget, widget instance, custom class, classes, css, zig, zigpress
 Requires at least: 3.1.1
-Tested up to: 3.4
-Stable tag: 0.3.2
+Tested up to: 3.4.2
+Stable tag: 0.4
 
 Lets you add a custom class to each widget instance.
 
 == Description ==
 
-ZigWidgetClass adds a free text field to each widget control form on your widget admin page. Enter a class name in the box and it will be added to the classes that WordPress applies to that widget instance. It only works with widgets created by extending the built-in multi widget class.
+ZigWidgetClass adds a free text field to each widget control form on your widget admin page. Enter a class name in the box and it will be added to the classes that WordPress applies to that widget instance. 
+
+IMPORTANT: It only works with widgets created by extending the built-in multi-widget class! If it appears not to work on a certain widget, that widget is probably not a multi-widget.
 
 Requires WordPress 3.1.1+ and PHP 5.2.4+.
 
-For further information and support, please visit [the ZigWidgetClass home page](http://www.zigpress.com/wordpress/plugins/zigwidgetclass/).
+For further information and support, please visit [the ZigWidgetClass home page](http://www.zigpress.com/plugins/zigwidgetclass/).
+
+= To Do =
+* Make it work with the Widget Context plugin as well as the Widget Logic plugin.
 
 == Installation ==
 
@@ -23,10 +28,14 @@ For further information and support, please visit [the ZigWidgetClass home page]
 
 == Frequently Asked Questions ==
 
-For further information and support, please visit [the ZigWidgetClass home page](http://www.zigpress.com/wordpress/plugins/zigwidgetclass/).
+For further information and support, please visit [the ZigWidgetClass home page](http://www.zigpress.com/plugins/zigwidgetclass/).
 
 == Changelog ==
 
+= 0.4 =
+* Coding style improvements and refactoring
+* Updated plugin URL
+* Verified compatibility with WordPress 3.4.2
 = 0.3.2 =
 * Verified compatibility with WordPress 3.4.x
 = 0.3.1 =
