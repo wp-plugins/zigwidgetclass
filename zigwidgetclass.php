@@ -3,10 +3,10 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.4
+Version: 0.4.1
 Author: ZigPress
 Requires at least: 3.1.1
-Tested up to: 3.4.2
+Tested up to: 3.5
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
