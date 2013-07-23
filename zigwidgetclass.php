@@ -3,17 +3,17 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.4.1
+Version: 0.5
 Author: ZigPress
-Requires at least: 3.1.1
-Tested up to: 3.5
+Requires at least: 3.5
+Tested up to: 3.5.2
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
 
 
 /*
-Copyright (c) 2011-2012 ZigPress
+Copyright (c) 2011-2013 ZigPress
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ if (!class_exists('zigwidgetclass')) {
 		public function __construct() {
 			global $wp_version;
 			if (version_compare(phpversion(), '5.2.4', '<')) wp_die('ZigWidgetClass requires PHP 5.2.4 or newer. Please update your server.');
-			if (version_compare($wp_version, '3.1.1', '<')) wp_die('ZigWidgetClass requires WordPress 3.1.1 or newer. Please update your installation.');
+			if (version_compare($wp_version, '3.5', '<')) wp_die('ZigWidgetClass requires WordPress 3.5 or newer. Please update your installation.');
 			add_filter('widget_form_callback', array($this, 'filter_widget_form_callback'), 10, 2);
 			add_filter('widget_update_callback', array($this, 'filter_widget_update_callback'), 10, 2);
 			add_filter('dynamic_sidebar_params', array($this, 'filter_dynamic_sidebar_params'));
@@ -56,8 +56,8 @@ if (!class_exists('zigwidgetclass')) {
 			if (!isset($instance['zigclass'])) $instance['zigclass'] = null;
 			?>
 			<p>
-			<label for='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass'>ZigWidgetClass:</label>
-			<input type='text' name='widget-<?php echo $widget->id_base?>[<?php echo $widget->number?>][zigclass]' id='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass' class='widefat' value='<?php echo $instance['zigclass']?>'/>
+			<label for='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass'>CSS Class:</label>
+			<input class='widefat' type='text' name='widget-<?php echo $widget->id_base?>[<?php echo $widget->number?>][zigclass]' id='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass' value='<?php echo $instance['zigclass']?>'/>
 			</p>
 			<?php
 			return $instance;
@@ -74,10 +74,18 @@ if (!class_exists('zigwidgetclass')) {
 			global $wp_registered_widgets;
 			$widget_id = $params[0]['widget_id'];
 			$widget = $wp_registered_widgets[$widget_id];
+
 			if (!($widgetlogicfix = $widget['callback'][0]->option_name)) {
 				# we do this because the Widget Logic plugin changes this structure
-				$widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name; 
+#				$widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name; COMMENTED BECAUSE THIS ASSIGNMENT IS IN THE SECOND TEST BELOW
+
+				if (!($widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name)) {
+					# same thing but for widget context plugin. i'm not convinced this is needed but it's in anyway.
+					$widgetlogicfix = $widget['callback_original_wc'][0]->option_name; 
+				}
+
 			}
+
 			$option_name = get_option($widgetlogicfix);
 			$number = $widget['params'][0]['number'];
 			if (isset($option_name[$number]['zigclass']) && !empty($option_name[$number]['zigclass'])) {
