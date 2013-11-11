@@ -3,10 +3,10 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.5
+Version: 0.6
 Author: ZigPress
 Requires at least: 3.5
-Tested up to: 3.5.2
+Tested up to: 3.7.1
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
@@ -75,22 +75,39 @@ if (!class_exists('zigwidgetclass')) {
 			$widget_id = $params[0]['widget_id'];
 			$widget = $wp_registered_widgets[$widget_id];
 
-			if (!($widgetlogicfix = $widget['callback'][0]->option_name)) {
-				# we do this because the Widget Logic plugin changes this structure
-#				$widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name; COMMENTED BECAUSE THIS ASSIGNMENT IS IN THE SECOND TEST BELOW
-
-				if (!($widgetlogicfix = $widget['callback_wl_redirect'][0]->option_name)) {
-					# same thing but for widget context plugin. i'm not convinced this is needed but it's in anyway.
-					$widgetlogicfix = $widget['callback_original_wc'][0]->option_name; 
+			# We're looking for the option_name (in wp_options) of where this widget's data is stored
+			# Default location
+			if (!($ouroptionname = $widget['callback'][0]->option_name)) {
+				# Alternate location of option name if widget logic installed
+				if (!($ouroptionname = $widget['callback_wl_redirect'][0]->option_name)) {
+					# Alternate location of option name if widget context installed
+					$ouroptionname = $widget['callback_original_wc'][0]->option_name; 
 				}
-
 			}
+			$option_name = get_option($ouroptionname);
 
-			$option_name = get_option($widgetlogicfix);
+			# within the option, we're looking for the data for the right widget number
+			# that's where we'll find the zigclass value if it exists
 			$number = $widget['params'][0]['number'];
 			if (isset($option_name[$number]['zigclass']) && !empty($option_name[$number]['zigclass'])) {
 				# add our class to the start of the existing class declaration
 				$params[0]['before_widget'] = preg_replace('/class="/', "class=\"{$option_name[$number]['zigclass']} ", $params[0]['before_widget'], 1);
+			} else {
+				# No zigclass found - but if we're using wp page widget, there could be one elsewhere
+				
+				# WP Page Widget plugin fix - the function exists test works because my plugin's name starts with Z so will always be loaded after WP Page Widget.
+				# If another plugin also uses this function name then you've got bigger problems than adding a class to a widget...
+				if (function_exists('pw_filter_widget_display_instance')) {
+					global $post;
+					$ouroptionname = 'widget_' . $post->ID . '_' . $widget['callback'][0]->id_base;
+					# did we find a wp page widget option for this post					
+					if ($option_name = get_option($ouroptionname)) {
+						$number = $widget['params'][0]['number'];
+						if (isset($option_name[$number]['zigclass']) && !empty($option_name[$number]['zigclass'])) {
+							$params[0]['before_widget'] = preg_replace('/class="/', "class=\"{$option_name[$number]['zigclass']} ", $params[0]['before_widget'], 1);
+						}
+					}
+				}
 			}
 			return $params;
 		}
