@@ -3,17 +3,17 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.6
+Version: 0.6.1
 Author: ZigPress
-Requires at least: 3.5
-Tested up to: 3.7.1
+Requires at least: 3.6
+Tested up to: 3.8
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
 
 
 /*
-Copyright (c) 2011-2013 ZigPress
+Copyright (c) 2011-2014 ZigPress
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ if (!class_exists('zigwidgetclass')) {
 		public function __construct() {
 			global $wp_version;
 			if (version_compare(phpversion(), '5.2.4', '<')) wp_die('ZigWidgetClass requires PHP 5.2.4 or newer. Please update your server.');
-			if (version_compare($wp_version, '3.5', '<')) wp_die('ZigWidgetClass requires WordPress 3.5 or newer. Please update your installation.');
+			if (version_compare($wp_version, '3.6', '<')) wp_die('ZigWidgetClass requires WordPress 3.5 or newer. Please update your installation.');
 			add_filter('widget_form_callback', array($this, 'filter_widget_form_callback'), 10, 2);
 			add_filter('widget_update_callback', array($this, 'filter_widget_update_callback'), 10, 2);
 			add_filter('dynamic_sidebar_params', array($this, 'filter_dynamic_sidebar_params'));
