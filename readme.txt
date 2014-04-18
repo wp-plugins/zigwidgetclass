@@ -3,8 +3,8 @@ Contributors: ZigPress
 Donate link: http://www.zigpress.com/donations/
 Tags: widgets, widget, widget instance, custom class, classes, css, zig, zigpress
 Requires at least: 3.6
-Tested up to: 3.8
-Stable tag: 0.6.1
+Tested up to: 3.9
+Stable tag: 0.6.2
 
 Lets you add a custom CSS class to each widget instance.
 
@@ -33,39 +33,44 @@ For further information and support, please visit [the ZigWidgetClass home page]
 
 == Changelog ==
 
+= 0.6.2 =
+* Confirmed compatibility with WordPress 3.9
+* Confirmed continued compatibility with WP Page Widgets plugin
+* Confirmed continued compatibility with Widget Logic plugin
+* Confirmed continued compatibility with Widget Context plugin
 = 0.6.1 =
-* Verified compatibility with WordPress 3.8
-* Verified continued compatibility with WP Page Widgets plugin
-* Verified continued compatibility with Widget Logic plugin
-* Verified continued compatibility with Widget Context plugin
+* Confirmed compatibility with WordPress 3.8
+* Confirmed continued compatibility with WP Page Widgets plugin
+* Confirmed continued compatibility with Widget Logic plugin
+* Confirmed continued compatibility with Widget Context plugin
 * Increased minimum WordPress version to 3.6 in accordance with ZigPress policy of encouraging WordPress updates
 = 0.6 =
 * Now compatible with WP Page Widget plugin - thanks to Edwin Ricaurte for suggesting that it should be
-* Verified continued compatibility with Widget Logic plugin
-* Verified continued compatibility with Widget Context plugin
-* Verified compatibility with WordPress 3.7.1
+* Confirmed continued compatibility with Widget Logic plugin
+* Confirmed continued compatibility with Widget Context plugin
+* Confirmed compatibility with WordPress 3.7.1
 = 0.5 =
-* Verified continued compatibility with Widget Logic plugin
+* Confirmed continued compatibility with Widget Logic plugin
 * Tested and verified compatibility with Widget Context plugin
 * Custom class box is now simply labelled "CSS Class"
-* Verified compatibility with WordPress 3.5.2
+* Confirmed compatibility with WordPress 3.5.2
 * Set minimim WordPress version to 3.5
 = 0.4.1 =
-* Verified compatibility with WordPress 3.5
+* Confirmed compatibility with WordPress 3.5
 = 0.4 =
 * Coding style improvements and refactoring
 * Updated plugin URL
-* Verified compatibility with WordPress 3.4.2
+* Confirmed compatibility with WordPress 3.4.2
 = 0.3.2 =
-* Verified compatibility with WordPress 3.4.x
+* Confirmed compatibility with WordPress 3.4.x
 = 0.3.1 =
-* Verified compatibility with WordPress 3.3.x
+* Confirmed compatibility with WordPress 3.3.x
 = 0.3 =
 * Now does actually work in conjunction with Widget Logic (so much for earlier testing)
 * Updated PHP version requirement in readiness for WordPress 3.2
 * Updated WordPress version requirement as new code only tested on most recent versions
 = 0.2 =
-* Verified compatibility with WordPress 3.1.1
+* Confirmed compatibility with WordPress 3.1.1
 = 0.1 =
 * First public release
 
