@@ -1,10 +1,10 @@
 === ZigWidgetClass ===
 Contributors: ZigPress
 Donate link: http://www.zigpress.com/donations/
-Tags: widgets, widget, widget instance, custom class, classes, css, zig, zigpress
+Tags: widgets, widget, widget instance, custom class, classes, css, widget logic, widget context, wp page widgets, zig, zigpress
 Requires at least: 3.6
-Tested up to: 3.9
-Stable tag: 0.6.2
+Tested up to: 4.0
+Stable tag: 0.7
 
 Lets you add a custom CSS class to each widget instance.
 
@@ -33,6 +33,9 @@ For further information and support, please visit [the ZigWidgetClass home page]
 
 == Changelog ==
 
+= 0.7 =
+* Confirmed compatibility with WordPress 4.0
+* Added admin information page
 = 0.6.2 =
 * Confirmed compatibility with WordPress 3.9
 * Confirmed continued compatibility with WP Page Widgets plugin
