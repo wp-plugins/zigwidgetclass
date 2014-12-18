@@ -3,20 +3,20 @@ Contributors: ZigPress
 Donate link: http://www.zigpress.com/donations/
 Tags: widgets, widget, widget instance, custom class, classes, css, widget logic, widget context, wp page widgets, zig, zigpress
 Requires at least: 3.6
-Tested up to: 4.0
-Stable tag: 0.7
+Tested up to: 4.1
+Stable tag: 0.7.2
 
 Lets you add a custom CSS class to each widget instance.
 
 == Description ==
 
-ZigWidgetClass adds a free text field to each widget control form on your widget admin page. Enter a CSS class name in the box and it will be added to the classes that WordPress applies to that widget instance. 
+ZigWidgetClass adds a free text field to each widget control form on your widget admin page. Enter a CSS class name in the box and it will be added to the classes that WordPress applies to that widget instance. To add multiple classes, simply separate them with a space.
 
-It has been tested and verified to work with the Widget Logic plugin, the Widget Context plugin and the WP Page Widgets plugin. If you have problems getting it to work with one of those plugins, make sure you are using the latest version(s).
+It has been tested and verified to work with the Widget Logic plugin, the Widget Context plugin, the WP Page Widget plugin and the Display Widgets plugin. If you have problems getting it to work with one of those plugins, make sure you are using the latest version(s).
 
-It only works with widgets that were created by extending the built-in multi-widget class. If it appears not to work on a certain widget, that widget is probably not a multi-widget. 
+It only works with widgets that were created by properly using WordPress's Widgets API. If it appears not to work on a certain widget, that widget probably breaks the API rules somehow.
 
-Also, if you have trouble getting it to work with the WP Page Widgets plugin, you should create and save each page widget first, before adding the CSS class, then save again.
+Also, if you have trouble getting it to work with the WP Page Widget plugin, you should create and save each page widget first, before adding the CSS class, then save again.
 
 Requires WordPress 3.6+ and PHP 5.2.4+.
 
@@ -33,6 +33,13 @@ For further information and support, please visit [the ZigWidgetClass home page]
 
 == Changelog ==
 
+= 0.7.2 =
+* Confirmed compatibility with WordPress 4.1
+= 0.7.1 =
+* Added tiny credit link to widget control panel
+* Input field label now reads 'CSS Classes' (instead of 'CSS Class'
+* Tested successfully with the Display Widgets plugin
+* Various documentation improvements (in this readme and on the plugin admin page)
 = 0.7 =
 * Confirmed compatibility with WordPress 4.0
 * Added admin information page

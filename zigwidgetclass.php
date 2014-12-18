@@ -3,10 +3,10 @@
 Plugin Name: ZigWidgetClass
 Plugin URI: http://www.zigpress.com/plugins/zigwidgetclass/
 Description: Lets you add a custom class to each widget instance.
-Version: 0.7
+Version: 0.7.2
 Author: ZigPress
 Requires at least: 3.6
-Tested up to: 4.0
+Tested up to: 4.1
 Author URI: http://www.zigpress.com/
 License: GPLv2
 */
@@ -77,18 +77,21 @@ if (!class_exists('zigwidgetclass')) {
 
 
 		function filter_widget_form_callback($instance, $widget) {
+			# show the input for entering the classes
 			if (!isset($instance['zigclass'])) $instance['zigclass'] = null;
 			?>
-			<p>
-			<label for='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass'>CSS Class:</label>
+			<p class="zigwidgetclass-control-wrap">
+			<label for='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass'>CSS Classes:</label>
 			<input class='widefat' type='text' name='widget-<?php echo $widget->id_base?>[<?php echo $widget->number?>][zigclass]' id='widget-<?php echo $widget->id_base?>-<?php echo $widget->number?>-zigclass' value='<?php echo $instance['zigclass']?>'/>
-			</p>
+			<a class="credit" href="http://www.zigpress.com/plugins/zigwidgetclass/" target="_blank">ZigWidgetClass plugin by ZigPress</a>
+			</p><!--/.zigwidgetclass-control-wrap-->
 			<?php
 			return $instance;
 		}
 
 
 		function filter_widget_update_callback($instance, $new_instance) {
+			# make sure the classes entered get saved along with the rest of the widget options
 			$instance['zigclass'] = $new_instance['zigclass'];
 			return $instance;
 		}
@@ -158,10 +161,13 @@ if (!class_exists('zigwidgetclass')) {
 			<h2>ZigWidgetClass - Information</h2>
 			<div class="wrap-left">
 			<div class="col-pad">
-			<p>ZigWidgetClass adds a free text field labelled 'CSS Class' to each widget control form on your widget admin page. Enter a CSS class name in the box and it will be added to the classes that WordPress applies to that widget instance. </p>
-			<p>It has been tested and verified to work with the Widget Logic plugin, the Widget Context plugin and the WP Page Widgets plugin. If you have problems getting it to work with one of those plugins, make sure you are using the latest version(s).</p>
-			<p>It only works with widgets that were created by extending the built-in multi-widget class. If it appears not to work on a certain widget, that widget is probably not a multi-widget. </p>
-			<p>Also, if you have trouble getting it to work with the WP Page Widgets plugin, you should create and save each page widget first, before adding the CSS class, then save again.</p>
+			<p>ZigWidgetClass adds a free text field labelled 'CSS Classes' to each widget control form on your widget admin page. Enter a CSS class name in the box and it will be added to the classes that WordPress applies to that widget instance. To add multiple classes, simply separate them with a space.</p>
+			<p>It has been tested and verified to work with the <a href="https://wordpress.org/plugins/widget-logic/" target="_blank">Widget Logic</a> plugin, the <a href="https://wordpress.org/plugins/widget-context/" target="_blank">Widget Context</a> plugin, the <a href="https://wordpress.org/plugins/wp-page-widget/" target="_blank">WP Page Widget</a> plugin and the <a href="https://wordpress.org/plugins/display-widgets/" target="_blank">Display Widgets</a> plugin. If you have problems getting it to work with one of those plugins, make sure you are using the latest version(s).</p>
+			<p>It only works with widgets that were created by properly using WordPress's <a href="http://codex.wordpress.org/Widgets_API" target="_blank">Widgets API</a>. If it appears not to work on a certain widget, that widget probably breaks the API rules somehow. </p>
+			<p>Also, if you have trouble getting it to work with the WP Page Widget plugin, you should create and save each page widget first, before adding the CSS class, then save again.</p>
+			<p>If you still have trouble using ZigWidgetClass, post a comment on the plugin's <a href="http://www.zigpress.com/plugins/zigwidgetclass/" target="_blank">home page.</a> Requests for support or new features will be prioritised if accompanied by a donation.</p>
+			<h4>ZigWidgetClass Pro</h4>
+			<p>A professional version of this plugin is being developed with useful extra features and will be available from CodeCanyon when ready.</p>
 			</div><!--col-pad-->
 			</div><!--wrap-left-->
 			<div class="wrap-right">
@@ -177,7 +183,7 @@ if (!class_exists('zigwidgetclass')) {
 			<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 			</form>
 			<p>If you find ZigWidgetClass useful, please keep it free and actively developed by making a donation.</p>
-			<p>Suggested donation: &euro;10 or an amount of your choice. Thanks!</p>
+			<p>Suggested donation: &euro;10 or an amount of your choice. Just click the Donate button. Thanks!</p>
 			</td></tr>
 			</table>
 			<table class="widefat donate" cellspacing="0">
@@ -186,7 +192,7 @@ if (!class_exists('zigwidgetclass')) {
 			</thead>
 			<tr><td>
 			<p><a href="http://www.zigpress.com/">ZigPress</a> is engaged in WordPress consultancy, solutions and research. We have also released a number of free plugins to support the WordPress community.</p>
-			<p><a target="_blank" href="http://www.zigpress.com/plugins/zigwidgetclass/"><img class="icon" src="<?php echo $this->plugin_folder?>images/cog.png" alt="ZigWidgetClass WordPress plugin by ZigPress" title="ZigWidgetClass WordPress plugin by ZigPress" /> ZigWidgetClass page</a></p>
+			<p><a target="_blank" href="http://www.zigpress.com/plugins/zigwidgetclass/"><img class="icon" src="<?php echo $this->plugin_folder?>images/cog.png" alt="ZigWidgetClass WordPress plugin by ZigPress" title="ZigWidgetClass WordPress plugin by ZigPress" /> ZigWidgetClass home page</a></p>
 			<p><a target="_blank" href="http://www.zigpress.com/plugins/"><img class="icon" src="<?php echo $this->plugin_folder?>images/plugin.png" alt="WordPress plugins by ZigPress" title="WordPress plugins by ZigPress" /> Other ZigPress plugins</a></p>
 			<p><a target="_blank" href="http://www.facebook.com/zigpress"><img class="icon" src="<?php echo $this->plugin_folder?>images/facebook.png" alt="ZigPress on Facebook" title="ZigPress on Facebook" /> ZigPress on Facebook</a></p>
 			<p><a target="_blank" href="http://twitter.com/ZigPress"><img class="icon" src="<?php echo $this->plugin_folder?>images/twitter.png" alt="ZigPress on Twitter" title="ZigPress on Twitter" /> ZigPress on Twitter</a></p>

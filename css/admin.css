@@ -1,37 +1,29 @@
 
+
+/* ADMIN PAGE */
+
+
 .zigwidgetclass-admin h2 { margin:0 0 15px 0; }
 .zigwidgetclass-admin p { margin:0 0 15px 0; }
 .zigwidgetclass-admin .strong { font-weight:bold; }
 .zigwidgetclass-admin .center { text-align:center; }
 .zigwidgetclass-admin .right { text-align:right; }
-.zigwidgetclass-admin .floatRight { float:right; display:inline; }
+.zigwidgetclass-admin .floatRight { float:right; }
 .zigwidgetclass-admin .clearer { height:0px; clear:both; line-height:0px; overflow:hidden; font-size:0; }
-.zigwidgetclass-admin .wrap-left { float:left; display:inline; width:70%; }
-.zigwidgetclass-admin .wrap-right { float:right; display:inline; width:30%; }
-.zigwidgetclass-admin .donate form { float:right; display:inline; text-align:right; width:150px; }
+.zigwidgetclass-admin .wrap-left { float:left; width:70%; }
+.zigwidgetclass-admin .wrap-right { float:right; width:30%; }
+.zigwidgetclass-admin .donate form { float:right; text-align:right; width:150px; }
 .zigwidgetclass-admin .col-pad { padding-right:15px; }
 .zigwidgetclass-admin table.widefat { margin-bottom:15px; width:99%; }
 .zigwidgetclass-admin img.icon { vertical-align:middle; margin-bottom:1px; }
-img.zigwidgetclass-icon { vertical-align:middle; margin-bottom:1px; }
 .zigwidgetclass-admin img.floatRight { margin-bottom:0; }
 
-table.form-table input.checkbox { vertical-align:baseline; }
 
-table.form-table .nowrap { white-space:nowrap; }
-table.form-table .right { text-align:right; }
-table.form-table .strong { font-weight:bold; }
-table.form-table tr td .smallish-text { width:100px; }
-
-table.form-table tr.topborder th,
-table.form-table tr.topborder td { border-top:1px solid #d1e5ee; }
-
-.row-actions { white-space:nowrap; }
+/* WIDGET CONTROL PANELS */
 
 
-.fixed { table-layout:auto !important; }
+.zigwidgetclass-control-wrap a.credit { font-size:9px; line-height:10px; display:block; text-align:right; text-decoration:none; }
+.zigwidgetclass-control-wrap a.credit:hover { text-decoration:underline; }
 
-.view-switch { display:none; }
 
-button.button-primary { font-family:verdana; }
-
-ul.zigwidgetclass_widget_help { list-style:square outside; margin:0 0 10px 18px; }
+/* EOF */
